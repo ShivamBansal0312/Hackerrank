@@ -1,0 +1,44 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution 
+{ 
+    static int modulus=1000*1000*1000+7;
+    public static void main(String[] args) 
+    {
+        Scanner sc=new Scanner(System.in);
+        String s=sc.nextLine();
+        int ar1[]=new int[26];
+        int ar2[][]=new int[26][26];
+        int ar3[]=new int[26];
+        int ans=0;
+        int i=0;
+
+        while(i<s.length())
+        {
+            int c = (int)(s.charAt(i)-'a');
+            ans=ans+(ar3[c]%modulus);
+            ans=ans%modulus;
+            int j=0;
+            while(j<26)
+            {
+                ar3[j]=ar3[j]+(ar2[j][c]%modulus);
+                ar3[j]=ar3[j]%modulus;
+                j++;
+            }
+            int k=0;
+            while(k<26)
+            {
+                ar2[k][c]=ar2[k][c]+(ar1[k]%modulus);
+                 ar2[k][c]=ar2[k][c]%modulus;
+                 k++;
+            }
+            
+            ar1[c]++;
+            ar1[c] = ar1[c]%modulus;
+            i++;
+        }
+        System.out.println(ans);
+    }
+
+}
